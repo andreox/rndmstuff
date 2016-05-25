@@ -1,0 +1,27 @@
+<HTML>
+
+<head>
+
+	<title> Gestionale Calciatori </title>
+	<script src="calciatori.js"></script>
+	
+</head>
+
+<body>
+
+	<form name="modulo">
+	
+		Nome : <input type="text" name="nome"><br>
+		Cognome : <input type="text" name="cognome"><br>
+		Data Di Nascita(gg/mm/aaaa) : <input type="text" name="data"><br>
+		Ruolo(Portiere/Difensore/Centrocampista/Attaccante) : <input type="text" name="ruolo"><br>
+		Numero di Presenze : <input type="number" name="presenze"><br>
+		
+		<input type="button" value="Aggiungi" onclick="Aggiungi();">
+		<input type="button" value="Visualizza per Presenze" onclick="VisualPres();">
+		<input type="button" value="Visualizza per Ruolo" onclick="VisualAlpha();">
+		<input type="button" value="Elimina" onclick="Elimina();">
+		
+	</form>
+	
+</body>
