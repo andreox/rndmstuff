@@ -1,2 +1,3 @@
 # school
-Programming exercises from my school
+School programming exercises
+Languages : Java , JavaScript , C , C++
