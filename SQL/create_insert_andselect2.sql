@@ -1,0 +1,27 @@
+CREATE TABLE Tipo( CodTipo INT, DescTipo VARCHAR(30) , PRIMARY KEY(CodTipo)) ;
+CREATE TABLE Ingrediente( CodIngrediente INT , DescIngrediente VARCHAR(30) , NomeIngrediente VARCHAR(10) , CalIng INT , CodTipo INT , PRIMARY KEY(CodIngrediente) , FOREIGN KEY(CodTipo) REFERENCES Tipo(CodTipo)) ;
+CREATE TABLE Classe( CodClasse INT , DescClasse VARCHAR(30) , PRIMARY KEY(CodClasse)) ;
+CREATE TABLE Piatto( CodPiatto INT , NomePiatto VARCHAR(30) , DescPiatto VARCHAR(20) , CodClasse INT , CalPiatto INT , PRIMARY KEY(CodPiatto) , FOREIGN KEY(CodClasse) REFERENCES Classe(CodClasse)) ;
+CREATE TABLE Contiene( CodPiatto INT , CodIngrediente INT , Quantita INT , FOREIGN KEY(CodPiatto) REFERENCES Piatto(CodPiatto) , FOREIGN KEY(CodIngrediente) REFERENCES Ingrediente(CodIngrediente) ) ;
+INSERT INTO Tipo VALUES( 01 , "Pesce" ) ;
+INSERT INTO Tipo VALUES( 02 , "Verdura" ) ;
+INSERT INTO Classe VALUES( 01 , "Alta" ) ;
+INSERT INTO Classe VALUES( 02 , "Media" ) ;
+INSERT INTO Classe VALUES( 03 , "Bassa" ) ;
+INSERT INTO Ingrediente VALUES ( 0001 , "Pesce Spada" , "Pesce Spada" , 150 , 01 ) ;
+INSERT INTO Ingrediente VALUES ( 0002 , "Insalta" , "Insalata" , 50 , 02 ) ;
+INSERT INTO Piatto VALUES ( 1 , "PesceSpada e Insalata" , "Pesce e verdura" , 03 , 200 ) ;
+INSERT INTO Contiene VALUES( 1 , 0001 , 100 ) ;
+INSERT INTO Contiene VALUES( 1 , 0002 , 50 ) ;
+INSERT INTO Tipo VALUES( 03 , "Frutta" ) ;
+INSERT INTO Tipo VALUES( 04 , "Condimento" ) ;
+INSERT INTO Ingrediente VALUES( 3 , "Fragola" , "Fragola" , 150 , 3 ) ;
+INSERT INTO Ingrediente VALUES( 4 , "Zucchero" , "Zucchero" , 200 , 4 ) ;
+INSERT INTO Piatto VALUES( 2 , "Fragola e Zucchero" , "Fragola e Zucchero" , 1 , 350 ) ;
+INSERT INTO Contiene VALUES( 2 , 3 , 10 ) ;
+INSERT INTO Contiene VALUES( 2 , 4 , 50 ) ;
+
+SELECT * FROM Ingrediente I WHERE I.CalIng > 80 ;
+SELECT P.CodPiatto , P.NomePiatto , P.CalPiatto , C.DescClasse FROM Piatto P , Ingrediente I , Classe C , Contiene K WHERE C.DescClasse = "Alta" AND P.CodClasse = C.CodClasse AND I.NomeIngrediente = "Zucchero" AND I.CodIngrediente = K.CodIngrediente AND K.CodPiatto = P.CodPiatto ;
+SELECT NomePiatto , CalPiatto FROM Piatto WHERE CalPiatto = ( SELECT MAX(CalPiatto) FROM Piatto ) ;
+SELECT P.NomePiatto FROM Piatto P , Contiene K , Ingrediente I , Tipo T WHERE P.CodPiatto = K.CodPiatto AND I.CodIngrediente = K.CodIngrediente AND I.CodTipo = T.CodTipo AND T.DescTipo != "Carne" ;
