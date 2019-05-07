@@ -1,7 +1,8 @@
 # school
-School programming exercises
-*Languages
-  *Java
-  *JavaScript
-  *C
-  *C++
+School programming exercises<br>
+## Languages :
+* Java
+* JavaScript
+* C
+* C++
+* SQL
