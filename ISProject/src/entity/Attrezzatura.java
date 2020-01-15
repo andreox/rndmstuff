@@ -1,3 +1,4 @@
+package entity;
 
 public class Attrezzatura {
 
@@ -20,6 +21,13 @@ public class Attrezzatura {
 	}
 	public void setS(Socio s) {
 		this.s = s;
+	}
+	
+	public void delS() {
+		
+		s = null ;
+		setAvailability(false) ;
+		
 	}
 	public String getTipo() {
 		return tipo;
