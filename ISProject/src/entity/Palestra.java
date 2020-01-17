@@ -3,18 +3,47 @@ import java.util.ArrayList ;
 import java.util.Calendar ;
 import java.util.GregorianCalendar;
 import java.util.Date ;
+import stub.StubSocio;
+import stub.StubAccessi;
+import stub.StubAttrezzatura;
 
 public class Palestra {
 
 	private ArrayList<Socio> Soci  ;
 	private ArrayList<Accesso> Accessi ;
 	private ArrayList<Attrezzatura> Attrezzature ;
+	private StubSocio s_s ;
+	private StubAttrezzatura s_attr ;
+	private StubAccessi s_acc ;
+	private static Palestra istance = null ;
 	
-	public Palestra() {
+	private Palestra() {
+		
+		Date date = new Date() ;
+		s_s = new StubSocio("Alessio","Andreozzi",date,"333",true,date,date,"001") ;
+		s_attr = new StubAttrezzatura() ;
+		s_acc = new StubAccessi() ;
 		
 		Soci = new ArrayList<Socio>() ;
 		Accessi = new ArrayList<Accesso>() ;
 		Attrezzature = new ArrayList<Attrezzatura>() ;
+		
+		Socio s = new Socio( s_s.getNome(), s_s.getCognome(),s_s.getDatanascita(),s_s.getTelefono(),s_s.getDatascadenzacertificato(),s_s.getDatascadenzaiscrizione(),s_s.getCodice_badge()) ;
+		Attrezzatura a = new Attrezzatura( s_attr.getTipo(),s_attr.getIdAttrezzo()) ;
+		Accesso a1 = new Accesso( s_acc.getDataingresso(),s_acc.getOraingresso()) ;
+		a1.setS(s) ;
+		
+		Soci.add(s) ;
+		Attrezzature.add(a) ;
+		Accessi.add(a1) ;
+		
+	}
+	
+	//Implementazione Singleton
+	public static Palestra getInstance() {
+		
+		if ( istance == null ) istance = new Palestra() ;
+		return istance ;
 		
 	}
 	
@@ -28,7 +57,7 @@ public class Palestra {
 	
 	//Aggiungo un accesso da parte di un socio, utilizzo la libreria Calendar per ottenere le variabili da utilizzare nel costruttore di Accesso
 
-	public void accedi( Socio s ) {
+	/*public void accedi( Socio s ) {
 		
 		Date date = new Date() ;
 		Calendar c = GregorianCalendar.getInstance();
@@ -39,7 +68,7 @@ public class Palestra {
 		Accessi.add(a) ;
 		
 	}
-	
+	*/
 	public boolean esci( Socio s1 ) {
 		
 		for ( int i = 0 ; i < Accessi.size(); i++ ) {
